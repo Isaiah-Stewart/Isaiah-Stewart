@@ -85,3 +85,17 @@ it; and the first entry written into the baseline's "Mistakes to avoid" list.
 3. *Five baseline sections were missing entirely* — Documentation, Scope, Commits, Never include,
    and Mistakes to avoid. Caught by reading the baseline's structure top to bottom. All five are
    now present.
+
+---
+
+## 2026-09-20 (cleanup)
+
+**What I asked:** Delete `test.md`, keep `BIO.md`.
+
+**What was produced:** `test.md` removed. `BIO.md` left in place, untouched and still empty —
+it stays as the eventual home for my biography, the way the instructor's repository uses it.
+
+**What was wrong and how it was caught:** Nothing went wrong. `test.md` was confirmed empty
+before removal (a single newline) and it remains recoverable from commit `528178d` in history.
+Logged as its own entry rather than folded into the one above, because a past entry is never
+edited.
