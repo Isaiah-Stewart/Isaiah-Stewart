@@ -48,3 +48,40 @@ everything was shown for review first.
    empty, and `README.md` still held the default GitHub profile template. `README.md` was replaced
    as instructed; `BIO.md` and `test.md` were left untouched and raised for a decision rather than
    deleted unasked.
+
+---
+
+## 2026-09-20 (same day, second session)
+
+**What I asked:** What is the baseline page? Then I pasted the full text of
+`https://adamwstauffer.github.io/ai-lms/ai-conventions.html`, which the previous session could
+not reach, so that `AGENTS.md` could finally be built from it.
+
+**What was produced:** `AGENTS.md` rewritten from the actual baseline — its section order and
+headings kept (About this repository, Where things are, Naming, How I work, What you may and may
+not draft, Documentation, Scope, Commits, Prompt log, Never include, Mistakes to avoid), with the
+**Naming section pasted in word for word** and verified byte-identical by diff against the source
+text. Tailoring added inside that frame: my field named under About and expanded in a My field
+section; the do-not-paste list moved under the baseline's own "Never include" heading where it
+belongs; explanation preferences rewritten to sit under the baseline's rule rather than against
+it; and the first entry written into the baseline's "Mistakes to avoid" list.
+
+**What was wrong and how it was caught:**
+
+1. *The reconstructed Naming section was wrong in kind, not just in wording.* I had guessed at
+   lowercase kebab-case, `YYYY-MM-DD-<slug>.md` in `docs/`, and model files named for their
+   capability. The real section is not a spelling convention at all — it is an instruction to
+   **ask before choosing a folder and never invent a path or filename**, because I supply the
+   exact one from the stage brief. Caught only by reading the pasted baseline. The placeholder
+   markers did their job: nothing fabricated survived into the file.
+2. *A section I did not flag was also wrong, and that is the more serious error.* My "How I work"
+   guidance said to lead with the recommendation and that I should be able to stop reading after
+   two sentences. The baseline says the opposite: *"Explain concepts fully and walk the worked
+   example. Do not hand me conclusions."* I had written it with confidence and no placeholder,
+   because it matched how executive reporting works in my job — but the point of coursework is
+   the derivation, not the headline. Caught by comparing against the baseline, not by any
+   internal check. Recorded in the new "Mistakes to avoid" section so the pattern is visible:
+   a convention guessed from my resume drifts toward my job and away from my learning.
+3. *Five baseline sections were missing entirely* — Documentation, Scope, Commits, Never include,
+   and Mistakes to avoid. Caught by reading the baseline's structure top to bottom. All five are
+   now present.
