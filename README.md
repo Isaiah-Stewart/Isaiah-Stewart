@@ -11,4 +11,7 @@ I've spent the last 5+ years analyzing budgets, forecasts, and financial strateg
 **Goals**
 Short-term, I want to get sharper with financial modeling and analytics so I can bring more value to every decision I'm part of. Long-term, I'm aiming for a senior leadership role where I can help shape financial strategy and mentor others coming up behind me in the field.
 
+**AI Disclosure**
+Claude AI helped assist with edits and clarity
+
 📫 Let's connect — [LinkedIn](#)
