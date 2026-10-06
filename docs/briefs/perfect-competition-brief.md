@@ -1,3 +1,4 @@
+---
 type: brief
 engagement: perfect-competition
 capability: marginal-analysis

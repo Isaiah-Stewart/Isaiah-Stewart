@@ -99,3 +99,32 @@ it stays as the eventual home for my biography, the way the instructor's reposit
 before removal (a single newline) and it remains recoverable from commit `528178d` in history.
 Logged as its own entry rather than folded into the one above, because a past entry is never
 edited.
+
+---
+
+## 2026-10-06
+
+**What I asked:** Across this session (begun 2026-09-29): format my perfect-competition
+engagement brief with frontmatter from my own answers, rate and critique my hypothesis and
+falsification over several drafts, run the Stage 1 critique prompt, interpret my instructor's
+Stage 1.1 feedback, and finally commit the corrected frontmatter.
+
+**What was produced:** Copyedits of my own wording only — the agent declined to write the
+hypothesis, citing the rule that it may not draft my briefs, and gave critiques and a
+fill-in-the-blank skeleton instead. A plain-language reading of the feedback. One file change:
+`---` added as the first line of `docs/briefs/perfect-competition-brief.md`, so the frontmatter
+parses. No brief content was changed.
+
+**What was wrong and how it was caught:**
+
+1. *The opening `---` was missing from the committed brief.* My original template opened with
+   `--`; the agent's formatted versions had `---`, but the file on `main` began at `type: brief`.
+   Neither of us checked the committed file. Caught by the instructor's feedback.
+2. *The agent steered the falsification the wrong way.* It suggested a profit threshold in
+   dollars; the instructor asked for a tomato-bed count that tests the reasoning, not the result.
+   Caught by the feedback.
+3. *The agent treated prices as genuinely unknown.* It flagged "prices unknown" vs. "inputs held
+   constant" as a contradiction and leaned toward treating prices as uncertain; the case gives the
+   prices, and the problem statement should say so. Caught by the feedback.
+4. *The Stage 1 critique ran against the chat's copy of the brief, not the committed file*, because
+   the brief was not pasted into the prompt. Raised by the agent when interpreting the feedback.
