@@ -175,9 +175,23 @@ the two agree here.
 `rate_Owner` is **$34.72/hr** and `rate_Temp` is **$17.36/hr** — the owner's time costs
 twice a temp's. The case spends the owner's 720 field hours first, so the expensive tier
 goes before the cheap one. The model must show the consequence rather than hide it:
-**marginal cost rises within each tier but falls once, at the crossover.** For tomatoes
-planted alone, standalone MC climbs to **$7,660.86** at bed 5, then drops to **$4,906.28**
-at bed 6, because bed 5 is where cumulative hours cross 720 (724.73 hours).
+**marginal cost rises within each tier but falls around the crossover.**
+
+The crossing bed — the one whose own hours straddle 720 — is charged at a **blended** rate:
+part owner, part temp. How MC behaves there depends on which part dominates, and it differs
+by crop:
+
+| Crop | Crossing bed | Owner share of that bed's hours | MC behaviour |
+|------|-------------:|--------------------------------:|--------------|
+| Tomatoes | 5 | 192.9 of 197.7 hours — mostly owner | MC **rises** to $7,660.86 on bed 5, then **falls** to $4,906.28 on bed 6. One decrease |
+| Carrots | 17 | 7.4 of 63.5 hours — mostly temp | MC **falls** on bed 17 ($2,552.10 → $1,670.90), then **falls again** on bed 18 ($1,589.14). Two decreases |
+| Mesclun | 14 | 32.5 of 62.1 hours | MC **falls** on bed 14 ($2,988.40 → $2,522.58), then **again** on bed 15 ($1,983.96). Two decreases |
+
+So the invariant is not "exactly one decrease". It is: **`sch_MC_*` is strictly increasing
+everywhere except the crossing bed and the bed immediately after it.** A crop whose crossing
+bed is mostly owner hours decreases once; a crop whose crossing bed is mostly temp hours
+decreases twice, as the blend completes its transition to the pure temp rate. Check C4
+tests the invariant, not a decrease count.
 
 Note that `in_OwnerFieldHrs × rate_Owner` = 720 × $34.7222 = **exactly $25,000**, half of
 `in_OwnerPay`. Only the field half of the owner's pay enters the crop decision; the other
@@ -374,7 +388,7 @@ finished until every row passes. All figures were computed from the §1 inputs.
 | C2.2 | Fertilizer | $44,000 |
 | C2.3 | Labor | $104,118.34 |
 | C2.4 | Fixed | $20,000 |
-| C2.5 | Total cost | $164,118.34 |
+| C2.5 | Total cost | $168,118.34 |
 | C2.6 | Owner tier | 720.00 hours costing exactly $25,000.00 |
 | C2.7 | Temp tier | 4,557.216 hours costing $79,118.34 |
 
@@ -397,10 +411,12 @@ Spot-checks against the worked example. All in hours.
 
 | | Test | Criterion |
 |---|------|-----------|
-| C4.1 | Break located | Cumulative tomato hours first exceed 720 at `sch_q` = 5 (724.73) |
-| C4.2 | MC peaks before it | `sch_MC_Tom` at bed 5 = $7,660.86 |
-| C4.3 | MC drops at it | `sch_MC_Tom` at bed 6 = $4,906.28 — a fall of $2,754.58, the only decrease permitted anywhere in the series |
-| C4.4 | Monotonic otherwise | `sch_MC_*` strictly increases at every other step, all three crops |
+| C4.1 | Tomato break located | Cumulative tomato hours first exceed 720 at `sch_q` = 5 (724.73) |
+| C4.2 | Carrot break located | Crossing bed is 17 (712.56 → 776.03 hours) |
+| C4.3 | Mesclun break located | Crossing bed is 14 (687.53 → 749.67 hours) |
+| C4.4 | MC peaks before the tomato break | `sch_MC_Tom` at bed 5 = $7,660.86 |
+| C4.5 | MC drops after it | `sch_MC_Tom` at bed 6 = $4,906.28 — a fall of $2,754.58 |
+| C4.6 | Monotonic outside the crossover | For each crop, the count of decreases at any bed other than the crossing bed or the one immediately after it is **zero**. This is the invariant; the decrease *count* itself is 1 for tomatoes and 2 for carrots and mesclun, per §2.2 |
 
 ### C5 — Which constraints bind, and why
 
@@ -475,7 +491,7 @@ Reported on `4_Results`. Each is a named cell; none performs original calculatio
 | `out_LaborCost` | Total field labor cost | $ | 104,118.34 |
 | `out_FertCost` | Total fertilizer cost | $ | 44,000 |
 | `out_FixedCost` | Fixed cost | $ | 20,000 |
-| `out_TotalCost` | Total cost | $ | 164,118.34 |
+| `out_TotalCost` | Total cost | $ | 168,118.34 |
 | `out_HoursTotal` | Total field hours required | hours | 5,277.216 |
 | `out_OwnerHours` | Hours at `rate_Owner` | hours | 720.000 |
 | `out_TempHours` | Hours at `rate_Temp` | hours | 4,557.216 |

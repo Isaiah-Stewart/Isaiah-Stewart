@@ -9,11 +9,17 @@ comparison visible unit by unit.
 | File | What it is | Status |
 |------|-----------|--------|
 | `spec.md` | Build specification for the Excel model: named input contract, sheet and region structure, calculation logic in named-range notation, acceptance criteria, named outputs | Complete |
-| `model.xlsx` | The workbook built from `spec.md` | Not yet added |
+| `model.xlsx` | The workbook built from `spec.md` — five sheets, 94 named ranges, 848 formulas, 54 in-workbook validation checks | Built; Solver run outstanding |
 
 `spec.md` is the instruction sheet, not a summary of a finished model. It is written so the
 workbook can be built from it alone, and so a reader can trace any reported figure back to
 a stated input.
+
+`model.xlsx` carries its own validation: `5_Checks` holds 54 computed PASS/FAIL tests plus
+three audit rows, and `4_Results` reports the tally. The decision cells on `3_Optimize` ship
+holding the optimal mix so those checks compute live; Solver is an Excel add-in and cannot be
+written into the file, so running it once from the Region D parameters — and recording that
+run in the sheet — is the outstanding step.
 
 ## Engagements
 
