@@ -128,3 +128,93 @@ parses. No brief content was changed.
    prices, and the problem statement should say so. Caught by the feedback.
 4. *The Stage 1 critique ran against the chat's copy of the brief, not the committed file*, because
    the brief was not pasted into the prompt. Raised by the agent when interpreting the feedback.
+
+---
+
+## 2026-10-27
+
+**What I asked:** Build the spec for the farm planting optimization model, to go in the
+capabilities directory ahead of building the Excel workbook. It had to answer five items — a
+named input contract with value, unit and source for every input; the sheet and region
+structure; calculation logic in named-range notation with no cell addresses; validation rules
+including the published check figures, the q = 1 hand calculation, "no error cells" and "every
+calculated cell contains a formula"; and named outputs. I supplied the labor formula and project
+goal document first, then the missing case givens, then the exact path
+`capabilities/marginal-analysis/spec.md`, and asked that the Solver area be laid out cleanly and
+the model kept simple rather than elaborate.
+
+**What was produced:** `capabilities/marginal-analysis/spec.md`. Five sheets, two named
+functions, roughly thirty named cells; a Solver region in five labeled parts (decisions,
+objective, constraint panel, a static table of the Solver dialog entries, and a P = MC readout);
+seven check groups totalling 37 acceptance sub-rows; and a build-principles section setting hard
+limits on size and complexity. The check figure was verified rather than copied: at 10 / 20 / 30
+profit computes to $42,761.66, which is the published $42,762 to the dollar, and exhaustive
+enumeration of all 10,416 feasible mixes confirms that mix is the global optimum.
+
+**What was wrong and how it was caught:**
+
+1. *I overclaimed on the two marginal-cost measures.* In the first draft I asserted that
+   standalone MC and mix-context incremental cost would diverge at the optimum, and built a
+   validation rule on that basis. Computing them showed they agree to the cent for all three
+   crops, because the owner's 720-hour pool is exhausted in both views so every marginal hour
+   prices at the temp rate. They diverge only for early carrot and mesclun beds. Caught by
+   running the numbers instead of trusting the reasoning. The spec now states the narrower true
+   claim and adds C7.4 to test the agreement rather than assume it.
+2. *My first draft was too elaborate for the problem.* Six sheets, a sprawling V1–V37 check list,
+   and separate cost and output sheets for a model with three decision variables. Caught when I
+   asked for it to be kept simple. Cut to five sheets with the check list grouped into seven
+   blocks, and a build-principles section added that fixes the cell budget and bars VBA, Power
+   Query, pivot tables and single-use helper columns.
+3. *Two rounding traps in the givens would each have broken the check quietly.* The reference
+   panel displays carrot hours as 0.833 and the wage rates as $34.72 and $17.36. Entering those
+   rounded figures rather than deriving them moves profit by +$6.83 and +$6.67 — small enough to
+   look like a tolerable difference and still fail the dollar-exact check. Caught by testing the
+   variants against the target before writing the input table. Both are now entry rules in §1.5
+   with a dedicated test, C7.5.
+4. *Givens were missing and I did not fill them in.* Revenue per bed, carrot and mesclun field
+   hours, fertilizer and fixed costs were absent from the first document. The draft carried
+   `[GIVEN REQUIRED]` markers and refused to estimate any of them until I supplied the panel.
+
+---
+
+## 2026-10-27 (continuation)
+
+**What I asked:** Add the README that belongs in `capabilities/marginal-analysis/` explaining
+what is in the folder, and merge the branch into `main`. The model file I will add myself later.
+
+**What was produced:** `capabilities/marginal-analysis/README.md` — what the capability is, a
+contents table marking `spec.md` complete and `model.xlsx` outstanding, the farm planting mix
+recorded as the engagement that exercised the capability, and pointers to `docs/briefs/` and
+`docs/decisions/` for the surrounding documents. Branch merged to `main`.
+
+**What was wrong and how it was caught:** Nothing went wrong this round. Worth recording that
+the README existed as a gap for two turns before it was written: the convention that a
+capability's README names its engagements is in `AGENTS.md`, but the scope rule there says to
+raise an unasked task rather than do it, so it was flagged twice and left until asked for. The
+rules worked as intended, in tension with each other, and the flag is what closed the gap.
+
+---
+
+## 2026-10-27 (merge)
+
+**What I asked:** Merge the capability branch into `main`.
+
+**What was produced:** `main` merged into the branch first to resolve a conflict, then the
+branch merged to `main`. `main` had moved while this branch was open — it carried my rewritten
+`README.md` with the bio and AI disclosure, the deletion of `BIO.md`, and
+`docs/briefs/perfect-competition-brief.md` from the 2026-10-06 session. Those three came across
+cleanly. `prompt-log.md` was the only genuine conflict: both branches had appended entries to
+the same place.
+
+**What was wrong and how it was caught:**
+
+1. *The entry above claims the branch was merged, and at the time it was written that had not
+   happened.* The merge was attempted immediately afterwards and was rejected for conflicts, so
+   the statement was premature when committed and briefly false on the record. It stands
+   uncorrected above because a past entry is never edited; this entry is the correction. The
+   lesson is to log what has happened, not what is about to.
+2. *The log conflicted because two sessions appended to it independently.* Resolved by keeping
+   every entry from both sides in date order — the 2026-10-06 entry ahead of the two 2026-10-27
+   entries — with nothing edited and nothing dropped, then verifying all six headers survived.
+   Caught by the merge itself. Worth expecting again: an append-only log conflicts on every
+   parallel session, and the only safe resolution is union, never one side winning.
