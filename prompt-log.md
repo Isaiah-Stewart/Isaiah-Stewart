@@ -99,3 +99,49 @@ it stays as the eventual home for my biography, the way the instructor's reposit
 before removal (a single newline) and it remains recoverable from commit `528178d` in history.
 Logged as its own entry rather than folded into the one above, because a past entry is never
 edited.
+
+---
+
+## 2026-10-27
+
+**What I asked:** Build the spec for the farm planting optimization model, to go in the
+capabilities directory ahead of building the Excel workbook. It had to answer five items — a
+named input contract with value, unit and source for every input; the sheet and region
+structure; calculation logic in named-range notation with no cell addresses; validation rules
+including the published check figures, the q = 1 hand calculation, "no error cells" and "every
+calculated cell contains a formula"; and named outputs. I supplied the labor formula and project
+goal document first, then the missing case givens, then the exact path
+`capabilities/marginal-analysis/spec.md`, and asked that the Solver area be laid out cleanly and
+the model kept simple rather than elaborate.
+
+**What was produced:** `capabilities/marginal-analysis/spec.md`. Five sheets, two named
+functions, roughly thirty named cells; a Solver region in five labeled parts (decisions,
+objective, constraint panel, a static table of the Solver dialog entries, and a P = MC readout);
+seven check groups totalling 37 acceptance sub-rows; and a build-principles section setting hard
+limits on size and complexity. The check figure was verified rather than copied: at 10 / 20 / 30
+profit computes to $42,761.66, which is the published $42,762 to the dollar, and exhaustive
+enumeration of all 10,416 feasible mixes confirms that mix is the global optimum.
+
+**What was wrong and how it was caught:**
+
+1. *I overclaimed on the two marginal-cost measures.* In the first draft I asserted that
+   standalone MC and mix-context incremental cost would diverge at the optimum, and built a
+   validation rule on that basis. Computing them showed they agree to the cent for all three
+   crops, because the owner's 720-hour pool is exhausted in both views so every marginal hour
+   prices at the temp rate. They diverge only for early carrot and mesclun beds. Caught by
+   running the numbers instead of trusting the reasoning. The spec now states the narrower true
+   claim and adds C7.4 to test the agreement rather than assume it.
+2. *My first draft was too elaborate for the problem.* Six sheets, a sprawling V1–V37 check list,
+   and separate cost and output sheets for a model with three decision variables. Caught when I
+   asked for it to be kept simple. Cut to five sheets with the check list grouped into seven
+   blocks, and a build-principles section added that fixes the cell budget and bars VBA, Power
+   Query, pivot tables and single-use helper columns.
+3. *Two rounding traps in the givens would each have broken the check quietly.* The reference
+   panel displays carrot hours as 0.833 and the wage rates as $34.72 and $17.36. Entering those
+   rounded figures rather than deriving them moves profit by +$6.83 and +$6.67 — small enough to
+   look like a tolerable difference and still fail the dollar-exact check. Caught by testing the
+   variants against the target before writing the input table. Both are now entry rules in §1.5
+   with a dedicated test, C7.5.
+4. *Givens were missing and I did not fill them in.* Revenue per bed, carrot and mesclun field
+   hours, fertilizer and fixed costs were absent from the first document. The draft carried
+   `[GIVEN REQUIRED]` markers and refused to estimate any of them until I supplied the panel.
