@@ -102,6 +102,35 @@ edited.
 
 ---
 
+## 2026-10-06
+
+**What I asked:** Across this session (begun 2026-09-29): format my perfect-competition
+engagement brief with frontmatter from my own answers, rate and critique my hypothesis and
+falsification over several drafts, run the Stage 1 critique prompt, interpret my instructor's
+Stage 1.1 feedback, and finally commit the corrected frontmatter.
+
+**What was produced:** Copyedits of my own wording only — the agent declined to write the
+hypothesis, citing the rule that it may not draft my briefs, and gave critiques and a
+fill-in-the-blank skeleton instead. A plain-language reading of the feedback. One file change:
+`---` added as the first line of `docs/briefs/perfect-competition-brief.md`, so the frontmatter
+parses. No brief content was changed.
+
+**What was wrong and how it was caught:**
+
+1. *The opening `---` was missing from the committed brief.* My original template opened with
+   `--`; the agent's formatted versions had `---`, but the file on `main` began at `type: brief`.
+   Neither of us checked the committed file. Caught by the instructor's feedback.
+2. *The agent steered the falsification the wrong way.* It suggested a profit threshold in
+   dollars; the instructor asked for a tomato-bed count that tests the reasoning, not the result.
+   Caught by the feedback.
+3. *The agent treated prices as genuinely unknown.* It flagged "prices unknown" vs. "inputs held
+   constant" as a contradiction and leaned toward treating prices as uncertain; the case gives the
+   prices, and the problem statement should say so. Caught by the feedback.
+4. *The Stage 1 critique ran against the chat's copy of the brief, not the committed file*, because
+   the brief was not pasted into the prompt. Raised by the agent when interpreting the feedback.
+
+---
+
 ## 2026-10-27
 
 **What I asked:** Build the spec for the farm planting optimization model, to go in the
@@ -163,3 +192,29 @@ the README existed as a gap for two turns before it was written: the convention 
 capability's README names its engagements is in `AGENTS.md`, but the scope rule there says to
 raise an unasked task rather than do it, so it was flagged twice and left until asked for. The
 rules worked as intended, in tension with each other, and the flag is what closed the gap.
+
+---
+
+## 2026-10-27 (merge)
+
+**What I asked:** Merge the capability branch into `main`.
+
+**What was produced:** `main` merged into the branch first to resolve a conflict, then the
+branch merged to `main`. `main` had moved while this branch was open — it carried my rewritten
+`README.md` with the bio and AI disclosure, the deletion of `BIO.md`, and
+`docs/briefs/perfect-competition-brief.md` from the 2026-10-06 session. Those three came across
+cleanly. `prompt-log.md` was the only genuine conflict: both branches had appended entries to
+the same place.
+
+**What was wrong and how it was caught:**
+
+1. *The entry above claims the branch was merged, and at the time it was written that had not
+   happened.* The merge was attempted immediately afterwards and was rejected for conflicts, so
+   the statement was premature when committed and briefly false on the record. It stands
+   uncorrected above because a past entry is never edited; this entry is the correction. The
+   lesson is to log what has happened, not what is about to.
+2. *The log conflicted because two sessions appended to it independently.* Resolved by keeping
+   every entry from both sides in date order — the 2026-10-06 entry ahead of the two 2026-10-27
+   entries — with nothing edited and nothing dropped, then verifying all six headers survived.
+   Caught by the merge itself. Worth expecting again: an append-only log conflicts on every
+   parallel session, and the only safe resolution is union, never one side winning.
