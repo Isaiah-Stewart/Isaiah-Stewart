@@ -218,3 +218,48 @@ the same place.
    entries — with nothing edited and nothing dropped, then verifying all six headers survived.
    Caught by the merge itself. Worth expecting again: an append-only log conflicts on every
    parallel session, and the only safe resolution is union, never one side winning.
+
+---
+
+## 2026-10-27 (model build)
+
+**What I asked:** Read `capabilities/marginal-analysis/spec.md` and build the workbook it
+specifies, as efficiently as possible, with professional finance formatting. Every input a named
+range with its stated unit, every calculated cell a formula with no pasted values, the validation
+rules computed inside the workbook, and the published check figures treated as acceptance
+criteria. Save it as `capabilities/marginal-analysis/model.xlsx`.
+
+**What was produced:** `model.xlsx` — five sheets, 94 named ranges, 848 formulas, 54 computed
+PASS/FAIL checks and 3 audit rows. LibreOffice recalculation reports zero formula errors. Values
+read back and tie to the spec: profit $42,761.66, revenue $210,880.00, labour $104,118.34, total
+hours 5,277.216, owner hours exactly 720, and the tomato marginal-cost series peaking at
+$7,660.86 on bed 5 then dropping to $4,906.28 on bed 6. The ±1-bed neighbour table confirms no
+feasible neighbour beats the optimum. Zero calculated cells contain a pasted value.
+
+**What was wrong and how it was caught:**
+
+1. *The spec had an arithmetic error that the model exposed.* Spec check C2.5 and output
+   `out_TotalCost` both stated total cost as $164,118.34. Labour plus fertilizer plus fixed is
+   $104,118.34 + $44,000 + $20,000 = **$168,118.34**. Profit was stated correctly, so the error
+   never showed up in any figure I had previously checked — it surfaced only when the workbook
+   computed total cost independently and the check failed. Both places in the spec are corrected.
+2. *The spec's claim that marginal cost "falls once, at the crossover" was wrong for two of three
+   crops.* The crossing bed is charged a blended owner/temp rate. For tomatoes that bed is almost
+   entirely owner hours, so MC rises then falls once. For carrots (bed 17, only 7.4 of 63.5 hours
+   at the owner rate) and mesclun (bed 14) it falls on the crossing bed and again on the next, as
+   the blend completes. I had generalised from the tomato case. Caught by the model counting two
+   decreases where the spec asserted one. §2.2 now states the real invariant — strictly increasing
+   outside the crossing bed and the one after it — and check C4 tests that invariant rather than a
+   decrease count.
+3. *I built a circular reference, which the spec explicitly forbids.* The error-cell check scanned
+   `4_Results!B5:N40`, which contains the cell reporting the check tally, which depends on the
+   check results, which include that scan. LibreOffice flagged the cycle and the check counted its
+   own error. Caught because the count said 1 while an independent scan of every sheet found no
+   error cells — the disagreement was the clue. The scan now starts at column C and the excluded
+   cell is checked separately by C7.1e, with a note on the sheet explaining why.
+4. *Two shell-level mistakes cost most of the session.* `openpyxl` is installed only under
+   `/usr/bin/python3.13`, and I was invoking a different interpreter with `-I`, which suppresses
+   exactly the site-packages it lives in — so the import failed in a way that looked like a missing
+   dependency. Separately, `ISFORMULA` is unavailable in the verification engine, so the
+   "every calculated cell contains a formula" test could not run there; it is now an audit row with
+   the live Excel formula printed beside it, rather than a green pass that proves nothing.
