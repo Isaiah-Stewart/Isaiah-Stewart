@@ -145,3 +145,21 @@ enumeration of all 10,416 feasible mixes confirms that mix is the global optimum
 4. *Givens were missing and I did not fill them in.* Revenue per bed, carrot and mesclun field
    hours, fertilizer and fixed costs were absent from the first document. The draft carried
    `[GIVEN REQUIRED]` markers and refused to estimate any of them until I supplied the panel.
+
+---
+
+## 2026-10-27 (continuation)
+
+**What I asked:** Add the README that belongs in `capabilities/marginal-analysis/` explaining
+what is in the folder, and merge the branch into `main`. The model file I will add myself later.
+
+**What was produced:** `capabilities/marginal-analysis/README.md` — what the capability is, a
+contents table marking `spec.md` complete and `model.xlsx` outstanding, the farm planting mix
+recorded as the engagement that exercised the capability, and pointers to `docs/briefs/` and
+`docs/decisions/` for the surrounding documents. Branch merged to `main`.
+
+**What was wrong and how it was caught:** Nothing went wrong this round. Worth recording that
+the README existed as a gap for two turns before it was written: the convention that a
+capability's README names its engagements is in `AGENTS.md`, but the scope rule there says to
+raise an unasked task rather than do it, so it was flagged twice and left until asked for. The
+rules worked as intended, in tension with each other, and the flag is what closed the gap.
