@@ -418,3 +418,15 @@ because it is a marginal cost and the lab shows it as a number.
 pasted memo text verbatim from "**Recommendation.**" to the end. Committed alone as
 "Add perfect-competition memo: first draft before AI editing" (`7682fc5`) and pushed to
 `claude/inspiring-gates-blp60v`. No other file was changed except this log.
+
+---
+
+## 2026-11-25 (memo revision)
+
+**What I asked:** Push my updated perfect-competition memo.
+
+**What was produced:** `docs/decisions/2026-11-24-perfect-competition-memo.md` replaced with
+my revised text. The paste arrived with its Markdown stripped; at my choice, the `---`
+frontmatter delimiters, the `#` title and the four bold labels were restored, with no
+wording changed. The frontmatter's `evidence:` field names
+`analysis/2026-11-24-perfect-competition-analysis.md`, which does not exist in the repository.
