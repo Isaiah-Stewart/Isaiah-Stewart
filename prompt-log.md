@@ -263,3 +263,78 @@ feasible neighbour beats the optimum. Zero calculated cells contain a pasted val
    dependency. Separately, `ISFORMULA` is unavailable in the verification engine, so the
    "every calculated cell contains a formula" test could not run there; it is now an audit row with
    the live Excel formula printed beside it, rather than a green pass that proves nothing.
+
+---
+
+## 2026-11-25
+
+**What I asked:** Add an audit findings section to `capabilities/marginal-analysis/spec.md`,
+using the prompt log, the Stage 2 assignment page and the model as references. Keep it
+simple and easy to understand.
+
+**What was produced:** §7 "Audit findings" at the end of `spec.md`. It has a table of the
+five checks the assignment requires, each with what it would catch, what was found and what
+was done; a record of two checks broken on purpose and restored; the three spec errors the
+build exposed (from earlier prompt-log entries); and open items. The q = 1 check, the check
+figures, the formula spot-check and the break-on-purpose tests were run against `model.xlsx`
+recalculated in LibreOffice. The Farm Profit Lab cross-check and the two Solver runs need
+desktop Excel and the lab, so they are left as marked **[TO DO]** blanks, not filled in.
+The capability README now says the spec includes the audit.
+
+**What was wrong and how it was caught:**
+
+1. *The assignment page could not be reached at first.* `adamwstauffer.github.io` was blocked
+   by the session's network policy, as it was on 2026-09-20. I asked rather than guessing what
+   the section should contain; it was read once I approved a personal environment that allows
+   that site.
+2. *Running the checks found two problems the existing checks miss.* Spec §6.1 says carrot
+   and mesclun MC never reach their revenue lines, but the schedules show they do (carrot beds
+   11–16, mesclun beds 7–13). And checks C4.6–C4.8 use cell addresses, which C7.13 does not
+   cover. Both are recorded as open items, not fixed, because neither was asked for.
+3. *The AI boundary.* The assignment says the audit is the student's own work. This section
+   is a draft built from checks the agent ran; I must verify it and complete the blanks myself.
+
+---
+
+## 2026-11-25 (continuation)
+
+**What I asked:** Push §7. Then change the spec to include the value of the next bed, from
+an explanation I pasted, and add an "exercised in:" line to the capability README.
+
+**What was produced:** §7 pushed. In `spec.md`: a `calc_NetNext_*` line in §3.5 (revenue less
+next-bed cost) with the two conditions under which it equals the value of a bed cap; a
+"Net value of next bed" column in Region E; three `out_NetNext_*` rows in §6 with expected
+values −$590.72 / $352.49 / $246.47 per bed; and an open item in §7.4 saying the workbook
+does not have the column yet. In `README.md`: an "Exercised in:" line, and `model.xlsx` added
+to the engagement's artifacts.
+
+**What was wrong and how it was caught:**
+
+1. *The pasted figures were checked, not copied.* Profit was recomputed at each +1-bed mix
+   independently of the workbook; all three differences matched the paste to the cent.
+2. *The paste describes a different copy of the model than the one in the repository.* It
+   mentions a "C37" fix and a file saved with carrots at 21; the committed `model.xlsx` holds
+   10 / 20 / 30. Raised with me rather than acted on.
+3. *Only the spec was changed, not the workbook,* following the Stage 2 rule to change the
+   spec first and regenerate. The workbook is now behind the spec, which §7.4 records.
+
+---
+
+## 2026-11-25 (§6.1 fix)
+
+**What I asked:** Fix the §6.1 sentence; tell me what §2.2 currently says about the tomato
+dip; and explain whether the workbook must be submitted with the Solver solution and how.
+
+**What was produced:** §6.1 rewritten to say that carrot and mesclun MC do cross their
+revenue lines mid-schedule (carrot beds 11–16, mesclun beds 7–13), then fall back below
+and stay below up to the cap. The §7.4 open item marked fixed. An explanation of §2.2 and
+of the course's "make the result survive the commit" steps, given in chat.
+
+**What was wrong and how it was caught:**
+
+1. *The committed `model.xlsx` has 20 of 848 formula cells with no saved value.* Found by
+   reading the file read-only, the check the course's Solver page recommends. It confirms
+   the workbook was last saved by a script, not by desktop Excel; it must be opened,
+   recalculated and saved in Excel before submission.
+2. *§2.2's heading still says marginal cost "falls once", and §2.2 and §6.1 explain the
+   tomato dip, which the assignment leaves for Stage 3.* Raised with me, not changed.

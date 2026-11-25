@@ -8,7 +8,7 @@ comparison visible unit by unit.
 
 | File | What it is | Status |
 |------|-----------|--------|
-| `spec.md` | Build specification for the Excel model: named input contract, sheet and region structure, calculation logic in named-range notation, acceptance criteria, named outputs | Complete |
+| `spec.md` | Build specification for the Excel model: named input contract, sheet and region structure, calculation logic in named-range notation, acceptance criteria, named outputs, and audit findings (§7) | Complete; audit has open items |
 | `model.xlsx` | The workbook built from `spec.md` — five sheets, 94 named ranges, 848 formulas, 54 in-workbook validation checks | Built; Solver run outstanding |
 
 `spec.md` is the instruction sheet, not a summary of a finished model. It is written so the
@@ -23,9 +23,13 @@ run in the sheet — is the outstanding step.
 
 ## Engagements
 
+Exercised in: Farm planting mix (2026-10) — the perfect-competition engagement, brief at
+`docs/briefs/perfect-competition-brief.md`.
+
+
 | Date | Engagement | Artifacts |
 |------|-----------|-----------|
-| 2026-10 | Farm planting mix — how many beds of tomatoes, carrots and mesclun maximize season profit under per-crop bed caps, a 64-bed total, and a cap of four temporary workers. Labor hours compound in the number of beds, so marginal cost rises and the highest-revenue crop does not take every bed | `spec.md` |
+| 2026-10 | Farm planting mix — how many beds of tomatoes, carrots and mesclun maximize season profit under per-crop bed caps, a 64-bed total, and a cap of four temporary workers. Labor hours compound in the number of beds, so marginal cost rises and the highest-revenue crop does not take every bed | `spec.md`, `model.xlsx` |
 
 ## Related documents
 
