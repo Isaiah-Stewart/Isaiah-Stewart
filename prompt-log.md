@@ -317,3 +317,24 @@ to the engagement's artifacts.
    10 / 20 / 30. Raised with me rather than acted on.
 3. *Only the spec was changed, not the workbook,* following the Stage 2 rule to change the
    spec first and regenerate. The workbook is now behind the spec, which §7.4 records.
+
+---
+
+## 2026-11-25 (§6.1 fix)
+
+**What I asked:** Fix the §6.1 sentence; tell me what §2.2 currently says about the tomato
+dip; and explain whether the workbook must be submitted with the Solver solution and how.
+
+**What was produced:** §6.1 rewritten to say that carrot and mesclun MC do cross their
+revenue lines mid-schedule (carrot beds 11–16, mesclun beds 7–13), then fall back below
+and stay below up to the cap. The §7.4 open item marked fixed. An explanation of §2.2 and
+of the course's "make the result survive the commit" steps, given in chat.
+
+**What was wrong and how it was caught:**
+
+1. *The committed `model.xlsx` has 20 of 848 formula cells with no saved value.* Found by
+   reading the file read-only, the check the course's Solver page recommends. It confirms
+   the workbook was last saved by a script, not by desktop Excel; it must be opened,
+   recalculated and saved in Excel before submission.
+2. *§2.2's heading still says marginal cost "falls once", and §2.2 and §6.1 explain the
+   tomato dip, which the assignment leaves for Stage 3.* Raised with me, not changed.

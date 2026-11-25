@@ -544,9 +544,13 @@ must be visible:
 2. The tomato series stepping **down** between beds 5 and 6, where the owner's 720 hours
    run out and the cheaper temp rate takes over.
 
-The carrot and mesclun series never reach their revenue lines within their caps. That is
-the picture of C5.2 and C5.3, and the reason those two crops are capacity-constrained
-rather than economically stopped.
+The carrot and mesclun series **do** cross their revenue lines, but only in the middle of
+the schedule, and then drop back below. Carrot MC is above $2,094 / bed at beds 11–16 and
+mesclun MC is above $2,700 / bed at beds 7–13; the first crossings are the published
+standalone P ≈ MC points of ~10 and ~6 beds. After the drop, both series stay below their
+revenue lines all the way to the bed cap, so the last carrot bed (20) and the last mesclun
+bed (30) are still worth planting. That is the picture of C5.2 and C5.3, and the reason
+those two crops are capacity-constrained rather than economically stopped.
 
 ---
 
@@ -595,10 +599,10 @@ Each was fixed in the spec, not patched in the workbook.
 - **Cell addresses in three checks.** C4.6–C4.8 refer to `2_Schedules!$F$8:$F$26` and similar
   ranges rather than names. This breaks the "no cell addresses" rule; C7.13 only audits
   `3_Optimize` and `4_Results`, so it did not catch it.
-- **§6.1 contradicts the model.** It says the carrot and mesclun MC series "never reach their
-  revenue lines within their caps". They do: standalone carrot MC is above $2,094 / bed at
-  beds 11–16, and mesclun MC is above $2,700 / bed at beds 7–13. That is exactly where the
-  published ~10 and ~6 crossings come from. The sentence needs correcting.
+- **§6.1 contradicted the model — fixed.** It said the carrot and mesclun MC series "never
+  reach their revenue lines within their caps". They do: standalone carrot MC is above
+  $2,094 / bed at beds 11–16, and mesclun MC is above $2,700 / bed at beds 7–13. §6.1 now
+  says so.
 - **The spec is ahead of the workbook.** §3.5, Region E and §6 now specify a "Net value of
   next bed" column (`calc_NetNext_*`, `out_NetNext_*`) that `model.xlsx` does not have yet.
   The expected values were confirmed by computing profit at each +1-bed mix directly: 10 / 21 / 30
