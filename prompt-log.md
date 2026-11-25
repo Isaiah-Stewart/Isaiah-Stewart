@@ -406,3 +406,15 @@ because it is a marginal cost and the lab shows it as a number.
    uploads were byte-identical and `5_Checks` G80 was empty. Check 5 is recorded on my
    confirmation that the test returned 0 in Excel; the committed file does not show it.
    Saving the Solver model into the sheet (Load/Save) is still open in §7.4.
+
+---
+
+## 2026-11-25 (memo first draft)
+
+**What I asked:** Commit my perfect-competition memo draft unchanged at
+`docs/decisions/2026-11-24-perfect-competition-memo.md`, with no edits, frontmatter or headings.
+
+**What was produced:** `docs/decisions/2026-11-24-perfect-competition-memo.md`, containing my
+pasted memo text verbatim from "**Recommendation.**" to the end. Committed alone as
+"Add perfect-competition memo: first draft before AI editing" (`7682fc5`) and pushed to
+`claude/inspiring-gates-blp60v`. No other file was changed except this log.
