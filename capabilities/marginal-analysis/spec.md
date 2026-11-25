@@ -566,8 +566,8 @@ desktop Excel or the Farm Profit Lab and have not been run yet.
 | # | Check | What it would catch | What was found | What was done |
 |---|-------|---------------------|----------------|---------------|
 | 1 | **q = 1 by hand.** One tomato bed: 1 × 2.5 × 36 × 1.10 = **99 hours**; MC = 99 × $34.7222/hr + $880 fertilizer = **$4,317.50 / bed** | A dropped `(1 + dim%)^q` exponent — the build would give 90 hours, and every figure downstream would be wrong without looking wrong | Model: 99 hours, $4,317.50 (C6.1, C6.2). Match | Nothing to fix |
-| 2 | **Farm Profit Lab cross-check.** At least one intermediate marginal cost compared against the lab | An error in the middle of the model that the totals hide. The lab is a separate build of the same model, so agreement is real evidence | **[TO DO]** Model value to compare: tomato MC at bed 6 = **$4,906.28 / bed**. Lab value: ____ | ____ |
-| 3 | **Solver from two starting points**, 0/0/0 and 20/0/0, GRG Nonlinear, integer beds | A local optimum passed off as the answer — GRG stops at the first peak it finds | From 0/0/0: **10 / 20 / 30, $42,761.66** — the published mix, and $42,762 to the dollar. Recorded in the Region D run record on `3_Optimize`. **[TO DO]** From 20/0/0: ____ / ____ / ____, $______. Same answer? ____ | Kept the Solver solution and saved from desktop Excel; the saved workbook shows 10 / 20 / 30 and 54 of 54 checks passing |
+| 2 | **Farm Profit Lab cross-check.** At least one intermediate marginal cost compared against the lab | An error in the middle of the model that the totals hide. The lab is a separate build of the same model, so agreement is real evidence | At 10 / 20 / 30, the lab's "+1 bed of Tomatoes" reads **−$591**. The model's `calc_NetNext_Tom` (`3_Optimize` E65) is **−$590.72** — $8,800 revenue less a **$9,390.72** marginal cost for the 11th bed. They agree to the dollar; the lab rounds to whole dollars | Nothing to fix |
+| 3 | **Solver from two starting points**, 0/0/0 and 20/0/0, GRG Nonlinear, integer beds | A local optimum passed off as the answer — GRG stops at the first peak it finds | From 0/0/0: **10 / 20 / 30, $42,761.66** — the published mix, and $42,762 to the dollar. Recorded in the Region D run record on `3_Optimize`. From 20/0/0: **10 / 20 / 30, $42,761.66**. Same answer from both starts, so no sign of a local optimum | Both runs recorded in rows 61–62 of the Region D run record. Kept the Solver solution and saved from desktop Excel; the saved workbook shows 10 / 20 / 30 and 54 of 54 checks passing |
 | 4 | **The published check figures** | Everything else, in aggregate | Mix **10 / 20 / 30** (60 of 64 beds); profit **$42,761.66**, which rounds to the published **$42,762**; standalone P ≈ MC points **10 / 10 / 6** beds (tomatoes / carrots / mesclun — the last bed whose MC is below price). All match. 54 of 54 computed checks on `5_Checks` pass; no error cells | Nothing to fix |
 | 5 | **Formulas, not pasted values.** Spot-check calculated cells | A number that is right today and wrong the moment an input changes | Spot-checked six cells on `2_Schedules` — each is a formula built from named inputs (e.g. hours = `$B7*in_HrsWkBed_Tom*in_WeeksSeason*(1+in_Dim_Tom)^$B7`). The only typed numbers on `3_Optimize` are the three bed decisions, which is correct | Nothing to fix. The full Excel test for this is printed under C7.14 on `5_Checks` — **[TO DO]** paste it in desktop Excel; it must return 0 |
 
@@ -611,7 +611,8 @@ Each was fixed in the spec, not patched in the workbook.
   $42,170.95 (−$590.72).
 - **Solver has been run in Excel — done.** GRG Nonlinear with integer beds, from 0 / 0 / 0, returned
   10 / 20 / 30 and $42,761.66. The solution was kept and the workbook saved from desktop Excel.
-  Still to do: the second start from 20 / 0 / 0 (check 3), and saving the Solver model into the
-  sheet with Load/Save — the saved file carries no Solver settings.
+  The second start, 20 / 0 / 0, returned the same 10 / 20 / 30 and $42,761.66. Still to do:
+  saving the Solver model into the sheet with Load/Save — the saved file carries no Solver
+  settings.
 - **Tomato MC dip — noted for Stage 3.** Tomato MC rises to **$7,660.86** at bed 5 and drops to
   **$4,906.28** at bed 6, then climbs again. Not explained here.
