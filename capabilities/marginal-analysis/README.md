@@ -8,7 +8,7 @@ comparison visible unit by unit.
 
 | File | What it is | Status |
 |------|-----------|--------|
-| `spec.md` | Build specification for the Excel model: named input contract, sheet and region structure, calculation logic in named-range notation, acceptance criteria, named outputs | Complete |
+| `spec.md` | Build specification for the Excel model: named input contract, sheet and region structure, calculation logic in named-range notation, acceptance criteria, named outputs, and audit findings (§7) | Complete; audit has open items |
 | `model.xlsx` | The workbook built from `spec.md` — five sheets, 94 named ranges, 848 formulas, 54 in-workbook validation checks | Built; Solver run outstanding |
 
 `spec.md` is the instruction sheet, not a summary of a finished model. It is written so the

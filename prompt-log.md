@@ -263,3 +263,33 @@ feasible neighbour beats the optimum. Zero calculated cells contain a pasted val
    dependency. Separately, `ISFORMULA` is unavailable in the verification engine, so the
    "every calculated cell contains a formula" test could not run there; it is now an audit row with
    the live Excel formula printed beside it, rather than a green pass that proves nothing.
+
+---
+
+## 2026-11-25
+
+**What I asked:** Add an audit findings section to `capabilities/marginal-analysis/spec.md`,
+using the prompt log, the Stage 2 assignment page and the model as references. Keep it
+simple and easy to understand.
+
+**What was produced:** §7 "Audit findings" at the end of `spec.md`. It has a table of the
+five checks the assignment requires, each with what it would catch, what was found and what
+was done; a record of two checks broken on purpose and restored; the three spec errors the
+build exposed (from earlier prompt-log entries); and open items. The q = 1 check, the check
+figures, the formula spot-check and the break-on-purpose tests were run against `model.xlsx`
+recalculated in LibreOffice. The Farm Profit Lab cross-check and the two Solver runs need
+desktop Excel and the lab, so they are left as marked **[TO DO]** blanks, not filled in.
+The capability README now says the spec includes the audit.
+
+**What was wrong and how it was caught:**
+
+1. *The assignment page could not be reached at first.* `adamwstauffer.github.io` was blocked
+   by the session's network policy, as it was on 2026-09-20. I asked rather than guessing what
+   the section should contain; it was read once I approved a personal environment that allows
+   that site.
+2. *Running the checks found two problems the existing checks miss.* Spec §6.1 says carrot
+   and mesclun MC never reach their revenue lines, but the schedules show they do (carrot beds
+   11–16, mesclun beds 7–13). And checks C4.6–C4.8 use cell addresses, which C7.13 does not
+   cover. Both are recorded as open items, not fixed, because neither was asked for.
+3. *The AI boundary.* The assignment says the audit is the student's own work. This section
+   is a draft built from checks the agent ran; I must verify it and complete the blanks myself.

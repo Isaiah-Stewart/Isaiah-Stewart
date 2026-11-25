@@ -522,3 +522,60 @@ must be visible:
 The carrot and mesclun series never reach their revenue lines within their caps. That is
 the picture of C5.2 and C5.3, and the reason those two crops are capacity-constrained
 rather than economically stopped.
+
+---
+
+## 7. Audit findings
+
+The workbook came back from an AI build. These are the checks run against it, what each
+would have caught, what was found, and what was done. Model values come from
+`model.xlsx` recalculated in LibreOffice on 2026-11-25; items marked **[TO DO]** need
+desktop Excel or the Farm Profit Lab and have not been run yet.
+
+### 7.1 The five required checks
+
+| # | Check | What it would catch | What was found | What was done |
+|---|-------|---------------------|----------------|---------------|
+| 1 | **q = 1 by hand.** One tomato bed: 1 × 2.5 × 36 × 1.10 = **99 hours**; MC = 99 × $34.7222/hr + $880 fertilizer = **$4,317.50 / bed** | A dropped `(1 + dim%)^q` exponent — the build would give 90 hours, and every figure downstream would be wrong without looking wrong | Model: 99 hours, $4,317.50 (C6.1, C6.2). Match | Nothing to fix |
+| 2 | **Farm Profit Lab cross-check.** At least one intermediate marginal cost compared against the lab | An error in the middle of the model that the totals hide. The lab is a separate build of the same model, so agreement is real evidence | **[TO DO]** Model value to compare: tomato MC at bed 6 = **$4,906.28 / bed**. Lab value: ____ | ____ |
+| 3 | **Solver from two starting points**, 0/0/0 and 20/0/0, GRG Nonlinear, integer beds | A local optimum passed off as the answer — GRG stops at the first peak it finds | **[TO DO]** From 0/0/0: ____ / ____ / ____, $______. From 20/0/0: ____ / ____ / ____, $______. Same answer? ____ | ____ |
+| 4 | **The published check figures** | Everything else, in aggregate | Mix **10 / 20 / 30** (60 of 64 beds); profit **$42,761.66**, which rounds to the published **$42,762**; standalone P ≈ MC points **10 / 10 / 6** beds (tomatoes / carrots / mesclun — the last bed whose MC is below price). All match. 54 of 54 computed checks on `5_Checks` pass; no error cells | Nothing to fix |
+| 5 | **Formulas, not pasted values.** Spot-check calculated cells | A number that is right today and wrong the moment an input changes | Spot-checked six cells on `2_Schedules` — each is a formula built from named inputs (e.g. hours = `$B7*in_HrsWkBed_Tom*in_WeeksSeason*(1+in_Dim_Tom)^$B7`). The only typed numbers on `3_Optimize` are the three bed decisions, which is correct | Nothing to fix. The full Excel test for this is printed under C7.14 on `5_Checks` — **[TO DO]** paste it in desktop Excel; it must return 0 |
+
+### 7.2 The checks were broken on purpose
+
+To prove the checks can fail, two inputs were changed in a scratch copy and the model recalculated:
+
+| Change | Checks that failed | Then |
+|--------|--------------------|------|
+| Carrot hours typed as `0.833` instead of `= in_HrsWkBed_Tom / 3` | 9, including the profit check C1.1 and the rounding test C7.7 | Changed back; all pass |
+| Tomato diminishing-returns rate 10% → 11% | 23, including C1.1, the q = 1 hand check C6.1, and every labor spot check in C3 | Changed back; all pass |
+
+### 7.3 Errors in this spec that the build exposed
+
+Each was fixed in the spec, not patched in the workbook.
+
+1. **Total cost was wrong.** The spec said $164,118.34; labor + fertilizer + fixed is
+   $104,118.34 + $44,000 + $20,000 = **$168,118.34**. Caught when the model's total-cost
+   check failed. Fixed in C2.5 and `out_TotalCost`.
+2. **"Marginal cost falls once" was wrong for carrots and mesclun.** They fall twice, on the
+   bed where the owner's hours run out and the bed after. Caught when the model counted two
+   drops where the spec said one. §2.2 and check C4 now test the real rule.
+3. **The first build had a circular reference** — the error scan on `4_Results` included the
+   cell that reports the scan. Caught because the check counted one error that an independent
+   scan could not find. The scan range was narrowed and the excluded cell is checked by C7.1e.
+
+### 7.4 Open items
+
+- **Cell addresses in three checks.** C4.6–C4.8 refer to `2_Schedules!$F$8:$F$26` and similar
+  ranges rather than names. This breaks the "no cell addresses" rule; C7.13 only audits
+  `3_Optimize` and `4_Results`, so it did not catch it.
+- **§6.1 contradicts the model.** It says the carrot and mesclun MC series "never reach their
+  revenue lines within their caps". They do: standalone carrot MC is above $2,094 / bed at
+  beds 11–16, and mesclun MC is above $2,700 / bed at beds 7–13. That is exactly where the
+  published ~10 and ~6 crossings come from. The sentence needs correcting.
+- **Solver has not been run in Excel.** The decision cells were set to 10 / 20 / 30 directly so the
+  checks could compute. Check 3 above, saving the Solver model to the sheet, and saving the file
+  last from desktop Excel are still outstanding.
+- **Tomato MC dip — noted for Stage 3.** Tomato MC rises to **$7,660.86** at bed 5 and drops to
+  **$4,906.28** at bed 6, then climbs again. Not explained here.
