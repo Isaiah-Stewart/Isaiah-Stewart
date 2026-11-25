@@ -603,11 +603,12 @@ Each was fixed in the spec, not patched in the workbook.
   reach their revenue lines within their caps". They do: standalone carrot MC is above
   $2,094 / bed at beds 11–16, and mesclun MC is above $2,700 / bed at beds 7–13. §6.1 now
   says so.
-- **The spec is ahead of the workbook.** §3.5, Region E and §6 now specify a "Net value of
-  next bed" column (`calc_NetNext_*`, `out_NetNext_*`) that `model.xlsx` does not have yet.
+- **The spec was ahead of the workbook — fixed.** §3.5, Region E and §6 specify a "Net value
+  of next bed" column (`calc_NetNext_*`, `out_NetNext_*`); `model.xlsx` now has it on
+  `3_Optimize` and `4_Results`, and it computes the values below.
   The expected values were confirmed by computing profit at each +1-bed mix directly: 10 / 21 / 30
   gives $43,114.16 (+$352.49), 10 / 20 / 31 gives $43,008.14 (+$246.47), and 11 / 20 / 30 gives
-  $42,170.95 (−$590.72). The workbook needs to be regenerated from the spec.
+  $42,170.95 (−$590.72).
 - **Solver has not been run in Excel.** The decision cells were set to 10 / 20 / 30 directly so the
   checks could compute. Check 3 above, saving the Solver model to the sheet, and saving the file
   last from desktop Excel are still outstanding.
