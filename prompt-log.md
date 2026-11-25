@@ -338,3 +338,27 @@ of the course's "make the result survive the commit" steps, given in chat.
    recalculated and saved in Excel before submission.
 2. *§2.2's heading still says marginal cost "falls once", and §2.2 and §6.1 explain the
    tomato dip, which the assignment leaves for Stage 3.* Raised with me, not changed.
+
+---
+
+## 2026-11-25 (workbook update)
+
+**What I asked:** Update the model with the new spec and upload it, so I can download it
+and rerun Solver.
+
+**What was produced:** `model.xlsx` now has the "Net value of next bed" column in Region E
+on `3_Optimize` (`calc_NetNext_*` = `in_RevBed_*` − `calc_IncNext_*`) and on `4_Results`
+(`out_NetNext_*`), in the column order the spec gives; "Stop reason" moved one column right,
+with its names repointed. Recalculated in LibreOffice: −$590.72 / $352.49 / $246.47 per bed,
+54 of 54 checks pass, no error cells. The file is set to recalculate fully when Excel opens
+it. README and §7.4 updated.
+
+**What was wrong and how it was caught:**
+
+1. *The usual Python library would have deleted the chart.* `openpyxl` drops charts when it
+   saves a workbook it loaded, and the spec requires the chart on `4_Results`. Caught by
+   listing the file's parts before editing; the change was made in the sheet XML directly,
+   and the chart was confirmed present afterwards.
+2. *The workbook is still not saved by Excel.* Cells added by script carry formulas but no
+   stored results until Excel calculates and saves. The file must be opened, Solver run, and
+   saved from desktop Excel before it is submitted.
