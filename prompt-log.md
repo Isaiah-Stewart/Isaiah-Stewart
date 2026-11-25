@@ -385,3 +385,24 @@ README, now record the Solver run: GRG Nonlinear, integer beds, from 0 / 0 / 0, 
    still to do rather than marked complete.
 3. *20 formula cells have no saved value* — all are chart-helper cells on `4_Results` that
    return blank for tomato and carrot beds 21–30, beyond their caps. Expected, not a defect.
+
+---
+
+## 2026-11-25 (audit completed)
+
+**What I asked:** Which Farm Profit Lab value to compare; record the lab value (−$591), the
+second Solver start and the formula test (0, on `5_Checks`), and push to `main`.
+
+**What was produced:** §7 checks 2, 3 and 5 completed in `spec.md`; the workbook with both
+Solver runs in the Region D run record committed unchanged as `model.xlsx`; README status
+updated. Recommended the lab's "+1 bed of Tomatoes" at 10 / 20 / 30 as the comparison,
+because it is a marginal cost and the lab shows it as a number.
+
+**What was wrong and how it was caught:**
+
+1. *I first gave the model's value (−591 from E65) as the lab value.* A comparison against
+   itself proves nothing. Caught by the agent and sent back; I then read −$591 from the lab.
+2. *The formula test and the saved Solver model were not in the uploaded file.* The last two
+   uploads were byte-identical and `5_Checks` G80 was empty. Check 5 is recorded on my
+   confirmation that the test returned 0 in Excel; the committed file does not show it.
+   Saving the Solver model into the sheet (Load/Save) is still open in §7.4.
