@@ -558,8 +558,8 @@ those two crops are capacity-constrained rather than economically stopped.
 
 The workbook came back from an AI build. These are the checks run against it, what each
 would have caught, what was found, and what was done. Model values come from
-`model.xlsx` recalculated in LibreOffice on 2026-11-25; items marked **[TO DO]** need
-desktop Excel or the Farm Profit Lab and have not been run yet.
+`model.xlsx` recalculated in LibreOffice on 2026-11-25, then from the workbook saved in
+desktop Excel after the Solver runs, and from the Farm Profit Lab.
 
 ### 7.1 The five required checks
 
@@ -569,7 +569,7 @@ desktop Excel or the Farm Profit Lab and have not been run yet.
 | 2 | **Farm Profit Lab cross-check.** At least one intermediate marginal cost compared against the lab | An error in the middle of the model that the totals hide. The lab is a separate build of the same model, so agreement is real evidence | At 10 / 20 / 30, the lab's "+1 bed of Tomatoes" reads **−$591**. The model's `calc_NetNext_Tom` (`3_Optimize` E65) is **−$590.72** — $8,800 revenue less a **$9,390.72** marginal cost for the 11th bed. They agree to the dollar; the lab rounds to whole dollars | Nothing to fix |
 | 3 | **Solver from two starting points**, 0/0/0 and 20/0/0, GRG Nonlinear, integer beds | A local optimum passed off as the answer — GRG stops at the first peak it finds | From 0/0/0: **10 / 20 / 30, $42,761.66** — the published mix, and $42,762 to the dollar. Recorded in the Region D run record on `3_Optimize`. From 20/0/0: **10 / 20 / 30, $42,761.66**. Same answer from both starts, so no sign of a local optimum | Both runs recorded in rows 61–62 of the Region D run record. Kept the Solver solution and saved from desktop Excel; the saved workbook shows 10 / 20 / 30 and 54 of 54 checks passing |
 | 4 | **The published check figures** | Everything else, in aggregate | Mix **10 / 20 / 30** (60 of 64 beds); profit **$42,761.66**, which rounds to the published **$42,762**; standalone P ≈ MC points **10 / 10 / 6** beds (tomatoes / carrots / mesclun — the last bed whose MC is below price). All match. 54 of 54 computed checks on `5_Checks` pass; no error cells | Nothing to fix |
-| 5 | **Formulas, not pasted values.** Spot-check calculated cells | A number that is right today and wrong the moment an input changes | Spot-checked six cells on `2_Schedules` — each is a formula built from named inputs (e.g. hours = `$B7*in_HrsWkBed_Tom*in_WeeksSeason*(1+in_Dim_Tom)^$B7`). The only typed numbers on `3_Optimize` are the three bed decisions, which is correct | Nothing to fix. The full Excel test for this is printed under C7.14 on `5_Checks` — **[TO DO]** paste it in desktop Excel; it must return 0 |
+| 5 | **Formulas, not pasted values.** Spot-check calculated cells | A number that is right today and wrong the moment an input changes | Spot-checked six cells on `2_Schedules` — each is a formula built from named inputs (e.g. hours = `$B7*in_HrsWkBed_Tom*in_WeeksSeason*(1+in_Dim_Tom)^$B7`). The only typed numbers on `3_Optimize` are the three bed decisions, which is correct | Nothing to fix. The full `ISFORMULA` test printed under C7.14 on `5_Checks` was run in desktop Excel and returned **0** — no schedule cell holds a pasted value |
 
 ### 7.2 The checks were broken on purpose
 

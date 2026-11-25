@@ -9,7 +9,7 @@ comparison visible unit by unit.
 | File | What it is | Status |
 |------|-----------|--------|
 | `spec.md` | Build specification for the Excel model: named input contract, sheet and region structure, calculation logic in named-range notation, acceptance criteria, named outputs, and audit findings (§7) | Complete; audit has open items |
-| `model.xlsx` | The workbook built from `spec.md` — five sheets, 100 named ranges, 854 formulas, 54 in-workbook validation checks | Built; Solver run from 0/0/0 (10/20/30, $42,761.66); 20/0/0 start outstanding |
+| `model.xlsx` | The workbook built from `spec.md` — five sheets, 100 named ranges, 854 formulas, 54 in-workbook validation checks | Built; Solver run from 0/0/0 and 20/0/0, both 10/20/30 at $42,761.66 |
 
 `spec.md` is the instruction sheet, not a summary of a finished model. It is written so the
 workbook can be built from it alone, and so a reader can trace any reported figure back to
@@ -19,7 +19,7 @@ a stated input.
 three audit rows, and `4_Results` reports the tally. The decision cells on `3_Optimize` ship
 holding the optimal mix. Solver has been run in desktop Excel from 0 / 0 / 0 with GRG Nonlinear and
 returned 10 / 20 / 30 at $42,761.66, recorded in the Region D run record; the file was saved from
-Excel with the solution kept. The second starting point, 20 / 0 / 0, is still to be run.
+Excel with the solution kept. A second start from 20 / 0 / 0 returned the same answer.
 
 ## Engagements
 
