@@ -23,9 +23,13 @@ run in the sheet — is the outstanding step.
 
 ## Engagements
 
+Exercised in: Farm planting mix (2026-10) — the perfect-competition engagement, brief at
+`docs/briefs/perfect-competition-brief.md`.
+
+
 | Date | Engagement | Artifacts |
 |------|-----------|-----------|
-| 2026-10 | Farm planting mix — how many beds of tomatoes, carrots and mesclun maximize season profit under per-crop bed caps, a 64-bed total, and a cap of four temporary workers. Labor hours compound in the number of beds, so marginal cost rises and the highest-revenue crop does not take every bed | `spec.md` |
+| 2026-10 | Farm planting mix — how many beds of tomatoes, carrots and mesclun maximize season profit under per-crop bed caps, a 64-bed total, and a cap of four temporary workers. Labor hours compound in the number of beds, so marginal cost rises and the highest-revenue crop does not take every bed | `spec.md`, `model.xlsx` |
 
 ## Related documents
 

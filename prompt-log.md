@@ -293,3 +293,27 @@ The capability README now says the spec includes the audit.
    cover. Both are recorded as open items, not fixed, because neither was asked for.
 3. *The AI boundary.* The assignment says the audit is the student's own work. This section
    is a draft built from checks the agent ran; I must verify it and complete the blanks myself.
+
+---
+
+## 2026-11-25 (continuation)
+
+**What I asked:** Push §7. Then change the spec to include the value of the next bed, from
+an explanation I pasted, and add an "exercised in:" line to the capability README.
+
+**What was produced:** §7 pushed. In `spec.md`: a `calc_NetNext_*` line in §3.5 (revenue less
+next-bed cost) with the two conditions under which it equals the value of a bed cap; a
+"Net value of next bed" column in Region E; three `out_NetNext_*` rows in §6 with expected
+values −$590.72 / $352.49 / $246.47 per bed; and an open item in §7.4 saying the workbook
+does not have the column yet. In `README.md`: an "Exercised in:" line, and `model.xlsx` added
+to the engagement's artifacts.
+
+**What was wrong and how it was caught:**
+
+1. *The pasted figures were checked, not copied.* Profit was recomputed at each +1-bed mix
+   independently of the workbook; all three differences matched the paste to the cent.
+2. *The paste describes a different copy of the model than the one in the repository.* It
+   mentions a "C37" fix and a file saved with carrots at 21; the committed `model.xlsx` holds
+   10 / 20 / 30. Raised with me rather than acted on.
+3. *Only the spec was changed, not the workbook,* following the Stage 2 rule to change the
+   spec first and regenerate. The workbook is now behind the spec, which §7.4 records.

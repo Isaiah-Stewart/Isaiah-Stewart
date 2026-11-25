@@ -285,6 +285,28 @@ calc_IncLast_Tom = calc_LaborCost
 The optimum satisfies, for every crop, either `calc_IncNext_* > in_RevBed_*` (economic
 stop) or that crop sitting at its bed cap (capacity stop).
 
+**Net value of the next bed.** One line per crop; tomato shown.
+
+```
+calc_NetNext_Tom = in_RevBed_Tom - calc_IncNext_Tom
+```
+
+This is what one more bed of that crop would add to season profit, in $ / bed. A
+negative value means the next bed loses money. For a crop stopped by its bed cap, a
+positive value is the **value of relaxing that cap by one bed** — what Solver would gain
+if the cap were one higher.
+
+That reading holds only while two conditions are true, and both hold at the published
+optimum:
+
+1. **The owner's 720 hours are already used up**, so every extra hour is paid at
+   `rate_Temp`. The next bed's cost then does not depend on what else is planted.
+2. **The next bed still fits** under `in_BedsTotal` and `cap_TempHours`. At 10 / 20 / 30
+   there are 4 beds and 1,202.784 temp hours to spare.
+
+If either fails, `calc_NetNext_*` still measures the gain from one more bed, but it is no
+longer the value of the cap alone.
+
 ---
 
 ## 4. The Solver region — `3_Optimize`
@@ -359,11 +381,11 @@ arbitrary start, so the run does not certify itself — checks C1 and C7.3 do.
 
 Two rows per crop, showing the economics of the answer directly on the optimization sheet.
 
-| Crop | Last bed planted | Next bed | Revenue | Stop reason |
-|------|-----------------|----------|---------|-------------|
-| Tomato | `calc_IncLast_Tom` | `calc_IncNext_Tom` | `in_RevBed_Tom` | `economic` or `at cap` |
-| Carrot | `calc_IncLast_Car` | `calc_IncNext_Car` | `in_RevBed_Car` | `economic` or `at cap` |
-| Mesclun | `calc_IncLast_Mes` | `calc_IncNext_Mes` | `in_RevBed_Mes` | `economic` or `at cap` |
+| Crop | Last bed planted | Next bed | Revenue | Net value of next bed | Stop reason |
+|------|-----------------|----------|---------|-----------------------|-------------|
+| Tomato | `calc_IncLast_Tom` | `calc_IncNext_Tom` | `in_RevBed_Tom` | `calc_NetNext_Tom` | `economic` or `at cap` |
+| Carrot | `calc_IncLast_Car` | `calc_IncNext_Car` | `in_RevBed_Car` | `calc_NetNext_Car` | `economic` or `at cap` |
+| Mesclun | `calc_IncLast_Mes` | `calc_IncNext_Mes` | `in_RevBed_Mes` | `calc_NetNext_Mes` | `economic` or `at cap` |
 
 ---
 
@@ -499,6 +521,9 @@ Reported on `4_Results`. Each is a named cell; none performs original calculatio
 | `out_MCLast_Tom` / `out_MCNext_Tom` | Incremental cost, last and next tomato bed | $ / bed | 8,248.59 / 9,390.72 |
 | `out_MCLast_Car` / `out_MCNext_Car` | Same, carrots | $ / bed | 1,688.95 / 1,741.51 |
 | `out_MCLast_Mes` / `out_MCNext_Mes` | Same, mesclun | $ / bed | 2,420.10 / 2,453.53 |
+| `out_NetNext_Tom` | Net value of the next tomato bed: revenue less next-bed cost | $ / bed | −590.72 |
+| `out_NetNext_Car` | Same, carrots — the value of one more bed of carrot cap | $ / bed | 352.49 |
+| `out_NetNext_Mes` | Same, mesclun — the value of one more bed of mesclun cap | $ / bed | 246.47 |
 | `out_StopReason_Tom` | Why tomatoes stop | text | economic |
 | `out_StopReason_Car` | Why carrots stop | text | at cap |
 | `out_StopReason_Mes` | Why mesclun stops | text | at cap |
@@ -574,6 +599,11 @@ Each was fixed in the spec, not patched in the workbook.
   revenue lines within their caps". They do: standalone carrot MC is above $2,094 / bed at
   beds 11–16, and mesclun MC is above $2,700 / bed at beds 7–13. That is exactly where the
   published ~10 and ~6 crossings come from. The sentence needs correcting.
+- **The spec is ahead of the workbook.** §3.5, Region E and §6 now specify a "Net value of
+  next bed" column (`calc_NetNext_*`, `out_NetNext_*`) that `model.xlsx` does not have yet.
+  The expected values were confirmed by computing profit at each +1-bed mix directly: 10 / 21 / 30
+  gives $43,114.16 (+$352.49), 10 / 20 / 31 gives $43,008.14 (+$246.47), and 11 / 20 / 30 gives
+  $42,170.95 (−$590.72). The workbook needs to be regenerated from the spec.
 - **Solver has not been run in Excel.** The decision cells were set to 10 / 20 / 30 directly so the
   checks could compute. Check 3 above, saving the Solver model to the sheet, and saving the file
   last from desktop Excel are still outstanding.
