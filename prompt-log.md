@@ -362,3 +362,26 @@ it. README and §7.4 updated.
 2. *The workbook is still not saved by Excel.* Cells added by script carry formulas but no
    stored results until Excel calculates and saves. The file must be opened, Solver run, and
    saved from desktop Excel before it is submitted.
+
+---
+
+## 2026-11-25 (Solver run)
+
+**What I asked:** Commit my Solver-updated `model.xlsx`, fill the spec blanks with 42,766,
+and record that Solver is no longer outstanding.
+
+**What was produced:** My uploaded workbook committed unchanged as `model.xlsx` (saved from
+desktop Excel; not edited by script afterwards). §7 check 3 and §7.4, and the capability
+README, now record the Solver run: GRG Nonlinear, integer beds, from 0 / 0 / 0, returning
+10 / 20 / 30 at $42,761.66.
+
+**What was wrong and how it was caught:**
+
+1. *I asked for $42,766; the workbook says $42,761.66.* Read from the decision cells,
+   `calc_Profit` and my own run record (D61) in the uploaded file. The spec records the
+   workbook's figure, which rounds to the published $42,762; $42,766 was not written in.
+2. *Only one of the two required Solver starts is in the file.* The run record holds the
+   0 / 0 / 0 run only, and the workbook carries no saved Solver model. Both are recorded as
+   still to do rather than marked complete.
+3. *20 formula cells have no saved value* — all are chart-helper cells on `4_Results` that
+   return blank for tomato and carrot beds 21–30, beyond their caps. Expected, not a defect.
