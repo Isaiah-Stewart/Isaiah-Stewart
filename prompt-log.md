@@ -497,3 +497,12 @@ and commit my revised memo.
 written. My revised memo committed unchanged to
 `docs/decisions/2026-11-24-perfect-competition-memo.md` as `f4488d6`, after showing the
 `git diff` and checking its figures against `model.xlsx`.
+
+---
+
+## 2026-11-28 (memo revision 3)
+
+**What I asked:** Commit my further-revised memo.
+
+**What was produced:** My memo committed unchanged as `1f61b16`, after showing the diff: the
+parenthetical on the standalone MC dip removed from Why.
