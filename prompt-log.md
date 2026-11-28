@@ -430,3 +430,19 @@ my revised text. The paste arrived with its Markdown stripped; at my choice, the
 frontmatter delimiters, the `#` title and the four bold labels were restored, with no
 wording changed. The frontmatter's `evidence:` field names
 `analysis/2026-11-24-perfect-competition-analysis.md`, which does not exist in the repository.
+
+---
+
+## 2026-11-28 (figures and memo update)
+
+**What I asked:** Turn the `4_Results` chart into image files; check whether the figures match
+the Figure 1 and Figure 2 references in my memo; make Figure 2 a two-panel carrots and
+mesclun image; upload the two figures with my updated memo.
+
+**What was produced:** `analysis/figures/tomato-mc.png` (Figure 1: tomato marginal cost by bed
+against the $8,800 price) and `analysis/figures/carrot-mesclun-mc.png` (Figure 2: carrots and
+mesclun panels, each showing the bed past the cap: carrot bed 21 at $1,741.51, mesclun bed 31 at
+$2,453.53). Both are drawn from `model.xlsx` values (`2_Schedules`, `3_Optimize` C66:E67), not
+screenshots of the workbook chart. `docs/decisions/2026-11-24-perfect-competition-memo.md`
+replaced with my uploaded revision, unchanged. The `4_Results` chart was also exported but not
+committed: its tomato and carrot lines drop to $0 after bed 20.
