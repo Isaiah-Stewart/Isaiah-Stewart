@@ -484,3 +484,25 @@ names.
 my uploaded file. Checked before committing: no "[WRITE YOUR OPENING SENTENCE" placeholder;
 both image paths (`figures/tomato-mc.png`, `figures/carrot-mesclun-mc.png`) match files in
 `analysis/figures/`. Committed alone as `e51d13c`.
+
+---
+
+## 2026-11-28 (memo revision 2)
+
+**What I asked:** Point out where to make the four memo fixes from the feedback (cut the dip and
+standalone paragraphs, correct the owner-pool sentence, fix four wording slips), then review
+and commit my revised memo.
+
+**What was produced:** A list of the lines and phrases each fix applies to; no memo text was
+written. My revised memo committed unchanged to
+`docs/decisions/2026-11-24-perfect-competition-memo.md` as `f4488d6`, after showing the
+`git diff` and checking its figures against `model.xlsx`.
+
+---
+
+## 2026-11-28 (memo revision 3)
+
+**What I asked:** Commit my further-revised memo.
+
+**What was produced:** My memo committed unchanged as `1f61b16`, after showing the diff: the
+parenthetical on the standalone MC dip removed from Why.
