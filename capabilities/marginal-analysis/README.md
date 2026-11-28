@@ -24,7 +24,9 @@ Excel with the solution kept. A second start from 20 / 0 / 0 returned the same a
 ## Engagements
 
 Exercised in: Farm planting mix (2026-10) — the perfect-competition engagement, brief at
-`docs/briefs/perfect-competition-brief.md`.
+`docs/briefs/perfect-competition-brief.md`, analysis at
+`analysis/2026-11-24-perfect-competition-analysis.md`, memo at
+`docs/decisions/2026-11-24-perfect-competition-memo.md`.
 
 
 | Date | Engagement | Artifacts |
