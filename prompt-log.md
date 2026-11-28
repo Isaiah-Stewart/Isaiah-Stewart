@@ -471,3 +471,16 @@ marginal-analysis workbook.
 
 **What was produced:** `.gitignore` restored to the six Office lock-file and OS-file patterns
 plus `scratch/`. Committed as `55bd31d`.
+
+---
+
+## 2026-11-28 (analysis commit)
+
+**What I asked:** Add my Stage 3 analysis to the repository unchanged at
+`analysis/2026-11-24-perfect-competition-analysis.md`, the path my memo's `evidence:` line
+names.
+
+**What was produced:** `analysis/2026-11-24-perfect-competition-analysis.md`, byte-identical to
+my uploaded file. Checked before committing: no "[WRITE YOUR OPENING SENTENCE" placeholder;
+both image paths (`figures/tomato-mc.png`, `figures/carrot-mesclun-mc.png`) match files in
+`analysis/figures/`. Committed alone as `e51d13c`.
