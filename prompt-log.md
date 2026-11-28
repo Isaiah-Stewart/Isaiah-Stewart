@@ -461,3 +461,13 @@ created). `drafts/README.md` and `figures/README.md` with the one-line descripti
 `capabilities/economic-research/README.md` with the description, status "Scaffolded; brief and
 spec not yet written", and the "Exercised in:" line I gave. Committed as `9fa9249` (.gitignore)
 and `6e424ca` (folders and READMEs).
+
+---
+
+## 2026-11-28 (.gitignore restored)
+
+**What I asked:** Add back the six ignore lines, because I am still working on the
+marginal-analysis workbook.
+
+**What was produced:** `.gitignore` restored to the six Office lock-file and OS-file patterns
+plus `scratch/`. Committed as `55bd31d`.
