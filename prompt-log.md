@@ -506,3 +506,26 @@ written. My revised memo committed unchanged to
 
 **What was produced:** My memo committed unchanged as `1f61b16`, after showing the diff: the
 parenthetical on the standalone MC dip removed from Why.
+
+---
+
+## 2026-11-28 (Stage 1.3 reflection)
+
+**What I asked:** Append my Stage 1.3 reflection to the end of `prompt-log.md`, unchanged.
+
+**What was produced:** My reflection appended as the last section of this file, byte-identical
+to my uploaded `stage_1_3_reflection.md`.
+
+---
+
+## 2026-11-27 — Stage 1.3 reflection
+
+**How I derived the memo's figures:** I ran Solver from 0/0/0 and 20/0/0; both landed on 10/20/30 beds at $42,761.66. Cap-plus-one re-runs gave $43,114.16 for carrots and $43,008.14 for mesclun, matching Region E's next-bed marginal costs. I pulled the standalone dips from the `2_Schedules` MC columns.
+
+**How I checked them:** I verified the formulas with a `q = 1` hand calculation and cross-checked outputs against the Farm Profit Lab and `5_Checks` (54/54). I also re-ran Solver from both starts and checked each memo and analysis figure against `2_Schedules`, `3_Optimize`, and `4_Results`.
+
+**Where AI helped:** AI explained the labor formula with a worked tomato example, walked me through the Solver setup cell by cell, and showed why mesclun's higher price does not make it the better cap to relax. It also caught that I had typed `21` over the formula in `3_Optimize!C37`, breaking 12 checks.
+
+**Where AI was wrong, and how I caught it:** AI's chat explanation put mesclun's MC peak at bed 12, and Claude Code wrote the chart note and spec §6.1 claiming carrot and mesclun MC "never reach" price when building the workbook. Checking the `2_Schedules` MC columns showed mesclun peaks at bed 13 ($2,988.40 vs. $2,939.98 at bed 12) and both crops cross price on owner-rate hours (beds 7–13 for mesclun; 11–16 for carrots), so I corrected Figure 2's explanation.
+
+**What I would do differently:** Next time, I will check raw `2_Schedules` columns and Solver's constraint table before trusting chart notes or AI summaries. I would also check diminishing labor returns at the brief stage—the exact gap I explained in analysis §5.
