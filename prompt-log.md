@@ -446,3 +446,18 @@ $2,453.53). Both are drawn from `model.xlsx` values (`2_Schedules`, `3_Optimize`
 screenshots of the workbook chart. `docs/decisions/2026-11-24-perfect-competition-memo.md`
 replaced with my uploaded revision, unchanged. The `4_Results` chart was also exported but not
 committed: its tomato and carrot lines drop to $0 after bed 20.
+
+---
+
+## 2026-11-28 (research-paper repo setup)
+
+**What I asked:** Set up the repository for the Individual Research Paper: add `scratch/` to
+`.gitignore` and, on my answer, remove its six other lines; create `drafts/` and `figures/`
+with one-line READMEs; create `capabilities/economic-research/README.md`; no brief, spec,
+drafts, paper or analysis.
+
+**What was produced:** `.gitignore` reduced to the single line `scratch/` (no `scratch/` folder
+created). `drafts/README.md` and `figures/README.md` with the one-line descriptions I gave.
+`capabilities/economic-research/README.md` with the description, status "Scaffolded; brief and
+spec not yet written", and the "Exercised in:" line I gave. Committed as `9fa9249` (.gitignore)
+and `6e424ca` (folders and READMEs).
